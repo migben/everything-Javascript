@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    border: solid 4px black;
+    /* background-color: blueviolet; */
+}
+
+.square {
+    width: 20px;
+    height: 20px;
+    /* background-color: pink; */
+    /* border: solid 1px black; */
+}
+
+.snake {
+    background-color: yellowgreen;
+}
+
+.apple {
+    background-color: yellow;
+}
