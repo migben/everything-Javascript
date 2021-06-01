@@ -1,6 +1,7 @@
 const grid = document.querySelector('.grid')
 const startButton = document.getElementById('start')
 const scoreDisplay = document.getElementById('score')
+const highScoreDisplay = document.getElementById('high-score')
 let squares = []
 let currentSnake = [2,1,0]
 let direction = 1
@@ -8,9 +9,14 @@ const width = 10
 let appleIndex = 0
 let apple;
 let score = 0
+let highScore = 0
 let intervalTime = 1000
 let speed = 0.9
 let timerId = 0
+
+if(parseInt(localStorage.getItem("highScore")) === 0){
+    localStorage.setItem("highScore", JSON.stringify(highScore))
+}
 
 
 function createGrid() {
@@ -34,17 +40,22 @@ function startGame() {
     //remove the snake
     currentSnake.forEach(index => squares[index].classList.remove('snake'))
     //remove the apple
-    apple.textContent = ''
     squares[appleIndex].classList.remove('apple')
+    apple.textContent = ''
+
     clearInterval(timerId)
     currentSnake = [2,1,0]
     score = 0
+
+    // returns to normal 
+    grid.style.border = 'solid 4px white'
+
     //re add new score to browser
     scoreDisplay.textContent = score
     direction = 1
     intervalTime = 1000
     generateApple()
-    //readd the class of snake to our new currentSnake
+    //re add the class of snake to our new currentSnake
     currentSnake.forEach(index => squares[index].classList.add('snake'))
     timerId = setInterval(move, intervalTime)
 }
@@ -55,9 +66,12 @@ function move() {
         (currentSnake[0] % width === width-1 && direction === 1) || //if snake has hit right wall
         (currentSnake[0] % width === 0 && direction === -1) || //if snake has hit left wall
         (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
-        squares[currentSnake[0] + direction].classList.contains('snake')
-    )
-    return clearInterval(timerId)
+        squares[currentSnake[0] + direction].classList.contains('snake')        
+    ){
+        grid.style.border = 'solid 4px red'
+        return clearInterval(timerId)
+    }
+    
 
     //remove last element from our currentSnake array
     const tail = currentSnake.pop()
@@ -84,6 +98,12 @@ function move() {
         score++
         //display our score
         scoreDisplay.textContent = score
+        /* check if score is more than HighScore from LOCAL STORAGE   */
+        if( score > localStorage.getItem("highScore") ){
+            highScore = score
+            localStorage.setItem("highScore", JSON.stringify(highScore))
+            highScoreDisplay.textContent = highScore
+        }
         //speed up our snake
         clearInterval(timerId)
         console.log(intervalTime)
@@ -91,8 +111,7 @@ function move() {
         console.log(intervalTime)
         timerId = setInterval(move, intervalTime)
     }
-    
-        
+          
     squares[currentSnake[0]].classList.add('snake')
 }
 
@@ -107,25 +126,18 @@ function generateApple() {
 } 
 generateApple()
 
-// 39 is right arrow
-// 38 is for the up arrow
-// 37 is for the left arrow
-// 40 is for the down arrow
-
 function control(e) {
-    if (e.keyCode === 39) {
-        console.log('right pressed')
+    if (e.keyCode === 39 || e.keyCode === 68) {
         direction = 1
-    } else if (e.keyCode === 38) {
-        console.log('up pressed')
+    } else if (e.keyCode === 38 || e.keyCode === 87) {
         direction = -width
-    } else if (e.keyCode === 37) {
-        console.log('left pressed')
+    } else if (e.keyCode === 37 || e.keyCode === 65) {
         direction = -1
-    } else if (e.keyCode === 40) {
-        console.log('down pressed')
+    } else if (e.keyCode === 40 || e.keyCode === 83) {
         direction = +width
     }
 }
+
+
 document.addEventListener('keyup', control)
 startButton.addEventListener('click', startGame)
