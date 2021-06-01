@@ -52,6 +52,7 @@ function startGame() {
 
     //re add new score to browser
     scoreDisplay.textContent = score
+    highScoreDisplay.textContent = localStorage.getItem("highScore")
     direction = 1
     intervalTime = 1000
     generateApple()
@@ -103,7 +104,7 @@ function move() {
             highScore = score
             localStorage.setItem("highScore", JSON.stringify(highScore))
             highScoreDisplay.textContent = highScore
-        }
+        } 
         //speed up our snake
         clearInterval(timerId)
         console.log(intervalTime)
