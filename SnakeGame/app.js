@@ -45,6 +45,7 @@ function startGame() {
 
     clearInterval(timerId)
     currentSnake = [2,1,0]
+    
     score = 0
 
     // returns to normal 
@@ -58,6 +59,7 @@ function startGame() {
     generateApple()
     //re add the class of snake to our new currentSnake
     currentSnake.forEach(index => squares[index].classList.add('snake'))
+    
     timerId = setInterval(move, intervalTime)
 }
 
@@ -73,14 +75,16 @@ function move() {
         return clearInterval(timerId)
     }
     
-
     //remove last element from our currentSnake array
     const tail = currentSnake.pop()
+
     //remove styling from last element
     squares[tail].classList.remove('snake')
     //add square in direction we are heading
     currentSnake.unshift(currentSnake[0] + direction)
     //add styling so we can see it
+
+    
     
     //deal with snake head gets apple
     if (squares[currentSnake[0]].classList.contains('apple')) {
@@ -114,6 +118,7 @@ function move() {
     }
           
     squares[currentSnake[0]].classList.add('snake')
+    
 }
 
 
