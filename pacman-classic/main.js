@@ -1,6 +1,7 @@
 const width = 28
 const grid = document.querySelector(".grid")
 const scoreDisplay = document.getElementById("score")
+let squares = []
 
 
 //28 * 28 = 784
@@ -10,7 +11,7 @@ const scoreDisplay = document.getElementById("score")
   // 3 - power-pellet
   // 4 - empty
 
-const layout = [
+  const layout = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
@@ -38,7 +39,7 @@ const layout = [
     1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
     1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ]
 
 // creating a board
@@ -56,6 +57,8 @@ function createBoard() {
             squares[i].classList.add('pac-dot')
         } else if (layout[i] === 1) {
             squares[i].classList.add('wall')
+        } else if (layout[i] === 2) {
+            squares[i].classList.add('ghost-lair')
         } else if (layout[i] === 3) {
             squares[i].classList.add('power-pellet')
         }
@@ -66,26 +69,49 @@ createBoard()
 
 
 /*
+✌
 WASD = Up, left, down & right
+87 65 83 68
+Arrows- up, left, down and right
+39 38 37 40
 */ 
 
 
 // Initial position for my Pacman
 
-let pacmanCurrentIndex = 500
+let pacmanCurrentIndex = 490
 
 squares[pacmanCurrentIndex].classList.add('pacman')
 
 function control(e){
+    squares[pacmanCurrentIndex].classList.remove('pacman')
     if(e.keyCode === 40 || e.keyCode === 83){
-        console.log("down")
+        // down
+        if(!squares[pacmanCurrentIndex + width].classList.contains('wall') && 
+            pacmanCurrentIndex + width < width * width){
+            pacmanCurrentIndex += width
+        }
     } else if(e.keyCode === 37 || e.keyCode === 65){
-        console.log('left')
+        // left
+        if( !squares[pacmanCurrentIndex -1].classList.contains('wall') &&
+            pacmanCurrentIndex % width !== 0){
+            pacmanCurrentIndex -= 1
+        }
     } else if(e.keyCode === 38 || e.keyCode === 87) {
-        console.log("up")
+        // up
+        if(!squares[pacmanCurrentIndex - width].classList.contains('wall') && 
+            pacmanCurrentIndex - width >= 0 ){
+            pacmanCurrentIndex -= width
+        }
     } else if(e.keyCode === 39 || e.keyCode === 68){
-        console.log("right")
+        // right
+        if(!squares[pacmanCurrentIndex +1].classList.contains('wall') && 
+            pacmanCurrentIndex % width < width - 1){
+            pacmanCurrentIndex += 1
+        }
     }
+
+    squares[pacmanCurrentIndex].classList.add('pacman')
 }
 
 document.addEventListener('keyup', control)

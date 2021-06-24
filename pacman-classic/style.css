@@ -1,34 +1,45 @@
 html, body {
     margin: 10;
     padding: 10;
+    color: white;
+}
+
+.container {
+    width: 460px;
+    background-color: black;
+    margin: auto;
+    padding: 20px;;
 }
 
 .grid {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 auto;
     width: 420px;
     height: 420px;
-    border: solid black;
+    border: solid blueviolet;
+    background-color: red;
 }
 
 .grid div {
     width: 15px;
     height: 15px;
-    background-color: blue;
 }
 
 .pac-dot {
-    background-color: green;
-    border: 5px solid white;
+    background-color: white;
+    border: 5px solid red;
     box-sizing: border-box;
 }
 
 .wall {
-    background-color: blue;
+    background-color: black;
+    /* border: 1px solid blue; */
 }
 
 .power-pellet {
-    background-color: green;
+    
+    background-color: violet;
     border-radius: 7.5px;
 }
 
