@@ -43,14 +43,49 @@ const layout = [
 
 // creating a board
 function createBoard() {
-    for (let i = 0; i < layout.length; i++ ) {
-        // create a square
+    //for loop 
+    for (let i = 0; i < layout.length; i++) {
+        //create a square 
         const square = document.createElement('div')
-        // put square in grid
+        //put square in grid 
         grid.appendChild(square)
-        // put square in squares array
+        //put square in squares array
         squares.push(square)
+
+        if (layout[i] === 0) {
+            squares[i].classList.add('pac-dot')
+        } else if (layout[i] === 1) {
+            squares[i].classList.add('wall')
+        } else if (layout[i] === 3) {
+            squares[i].classList.add('power-pellet')
+        }
+        
+    }
+}
+createBoard()
+
+
+/*
+WASD = Up, left, down & right
+*/ 
+
+
+// Initial position for my Pacman
+
+let pacmanCurrentIndex = 500
+
+squares[pacmanCurrentIndex].classList.add('pacman')
+
+function control(e){
+    if(e.keyCode === 40 || e.keyCode === 83){
+        console.log("down")
+    } else if(e.keyCode === 37 || e.keyCode === 65){
+        console.log('left')
+    } else if(e.keyCode === 38 || e.keyCode === 87) {
+        console.log("up")
+    } else if(e.keyCode === 39 || e.keyCode === 68){
+        console.log("right")
     }
 }
 
-createBoard()
+document.addEventListener('keyup', control)
