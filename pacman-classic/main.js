@@ -131,7 +131,26 @@ document.addEventListener('keyup', control)
 function pacDotEaten(){
     if(squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
         squares[pacmanCurrentIndex].classList.remove('pac-dot')
-        score++
+        score += 10
         scoreDisplay.innerHTML = score
     }
 }
+
+class Ghost {
+    constructor(className, startIndex, speed){
+        this.className = className
+        this.startIndex = startIndex
+        this.speed = speed
+    }
+}
+
+const ghosts = [
+    new Ghost('blinky', 348, 250),
+    new Ghost('pinky', 376, 400),
+    new Ghost('inky', 351, 300),
+    new Ghost('clyde', 379, 500)
+]
+
+// drawing my ghosts
+
+ghosts.forEach(ghost => squares[ghost.startIndex].classList.add(ghost.className))
