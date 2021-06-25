@@ -50,21 +50,38 @@ html, body {
 }
 
 .blinky {
-    background-color: green;
+    background-image: url(./img/ghost-pacman-svgrepo-com.svg);
+    background-color: #89FC00;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
     border: none;
 }
 
 .pinky {
+    background-image: url(./img/ghost-pacman-svgrepo-com.svg);
     background-color: pink;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
     border: none;
 }
 
 .inky {
+    background-image: url(./img/ghost-pacman-svgrepo-com.svg);
     background-color: aqua;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
     border: none;
 }
 
 .clyde {
+    background-image: url(./img/ghost-pacman-svgrepo-com.svg);
     background-color: orange;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border: none;
+}
+
+.scared-ghost {
+    background-color: paleturquoise;
     border: none;
 }
