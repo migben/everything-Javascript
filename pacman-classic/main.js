@@ -87,27 +87,37 @@ function control(e){
     squares[pacmanCurrentIndex].classList.remove('pacman')
     if(e.keyCode === 40 || e.keyCode === 83){
         // down
-        if(!squares[pacmanCurrentIndex + width].classList.contains('wall') && 
+        if(!squares[pacmanCurrentIndex + width].classList.contains('ghost-lair') && 
+            !squares[pacmanCurrentIndex + width].classList.contains('wall') && 
             pacmanCurrentIndex + width < width * width){
             pacmanCurrentIndex += width
         }
     } else if(e.keyCode === 37 || e.keyCode === 65){
         // left
-        if( !squares[pacmanCurrentIndex -1].classList.contains('wall') &&
+        if(!squares[pacmanCurrentIndex -1].classList.contains('ghost-lair') && 
+            !squares[pacmanCurrentIndex -1].classList.contains('wall') &&
             pacmanCurrentIndex % width !== 0){
             pacmanCurrentIndex -= 1
+            if(pacmanCurrentIndex === 364){
+                pacmanCurrentIndex = 391
+            }
         }
     } else if(e.keyCode === 38 || e.keyCode === 87) {
         // up
-        if(!squares[pacmanCurrentIndex - width].classList.contains('wall') && 
+        if(!squares[pacmanCurrentIndex -width].classList.contains('ghost-lair') && 
+            !squares[pacmanCurrentIndex - width].classList.contains('wall') && 
             pacmanCurrentIndex - width >= 0 ){
             pacmanCurrentIndex -= width
         }
     } else if(e.keyCode === 39 || e.keyCode === 68){
         // right
-        if(!squares[pacmanCurrentIndex +1].classList.contains('wall') && 
+        if(!squares[pacmanCurrentIndex +1].classList.contains('ghost-lair') && 
+            !squares[pacmanCurrentIndex +1].classList.contains('wall') && 
             pacmanCurrentIndex % width < width - 1){
             pacmanCurrentIndex += 1
+            if (pacmanCurrentIndex === 391) {
+                pacmanCurrentIndex = 364
+            } 
         }
     }
 
