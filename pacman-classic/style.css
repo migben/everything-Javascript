@@ -1,7 +1,10 @@
 html, body {
     margin: 10;
     padding: 10;
-    color: white;
+}
+
+h3 {
+    color: #fff;
 }
 
 .container {
