@@ -21,3 +21,20 @@ nav > h3 {
 #blog-list {
     padding: 30px 10px 10px;
 }
+
+form {
+    padding: 60px 10px 10px;
+    display: grid;
+    background-color: aqua;
+
+}
+
+input#post-title, textarea#post-body {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    font-size: 10px;
+    cursor: pointer;
+}
