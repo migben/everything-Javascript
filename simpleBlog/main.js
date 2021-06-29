@@ -1,13 +1,13 @@
 const blogList = document.getElementById("blog-list")
 const btn = document.getElementById("btn")
 const newPost = document.getElementById("new-post")
+let postsArr = []
+const titleInput = document.getElementById("post-title")
+const bodyInput = document.getElementById("post-body")
+const form = document.getElementById("new-post")
 
-fetch("https://apis.scrimba.com/jsonplaceholder/posts")
-    .then(res => res.json())
-    .then(data => {
-        const postsArr = data.slice(0, 5)
-        // console.log(postsArr)
-        let html = ""
+function renderPosts(){
+    let html = ""
 
         for(let post of postsArr){
             html += `
@@ -17,13 +17,21 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts")
             `
         }
         blogList.innerHTML = html
+}
+
+fetch("https://apis.scrimba.com/jsonplaceholder/posts")
+    .then(res => res.json())
+    .then(data => {
+        postsArr = data.slice(0, 5)
+        // console.log(postsArr)
+        renderPosts()
     })
 
 newPost.addEventListener("submit", function(e){ // listening for the form submit
     e.preventDefault()
 
-    const postTitle = document.getElementById("post-title").value
-    const postBody = document.getElementById("post-body").value
+    const postTitle = titleInput.value
+    const postBody = bodyInput.value
     const data = {
         title: postTitle,
         body: postBody
@@ -39,14 +47,17 @@ newPost.addEventListener("submit", function(e){ // listening for the form submit
 
     fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
         .then(res => res.json())
-        .then(data => {
-            console.log(data)
+        .then(post => {
+            // console.log(data)
 
-            blogList.innerHTML = `
-                <h3>${post.title}</h3>
-                <p>${post.body}</p>
-                <hr />
-                ${blogList.innerHTML}
-            `
+            postsArr.unshift(post)
+            renderPosts()
+
+            // clearing the form after submission
+
+            // titleInput.value = ""
+            // bodyInput.value = ""
+
+            form.reset()
         })
 })
