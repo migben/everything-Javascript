@@ -6,6 +6,8 @@ const titleInput = document.getElementById("post-title")
 const bodyInput = document.getElementById("post-body")
 const form = document.getElementById("new-post")
 
+// This project was built to practice REST basics
+
 function renderPosts(){
     let html = ""
 
@@ -19,7 +21,7 @@ function renderPosts(){
         blogList.innerHTML = html
 }
 
-fetch("https://apis.scrimba.com/jsonplaceholder/posts")
+fetch("https://apis.scrimba.com/jsonplaceholder/posts") // our get req
     .then(res => res.json())
     .then(data => {
         postsArr = data.slice(0, 5)
@@ -45,7 +47,7 @@ newPost.addEventListener("submit", function(e){ // listening for the form submit
         }
     }
 
-    fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
+    fetch("https://apis.scrimba.com/jsonplaceholder/posts", options) // our post request
         .then(res => res.json())
         .then(post => {
             // console.log(data)
