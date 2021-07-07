@@ -6,7 +6,7 @@ let deckId
 const remainingText = document.getElementById("remaining")
 
 function handleClick(){
-    fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
+    fetch("https://deckofcardsapi.com/api/deck/new/shuffle")
     .then(res => res.json())
     .then(data => {
         console.log(data)
@@ -18,21 +18,25 @@ function handleClick(){
 btn.addEventListener('click', handleClick)
 
 btn2.addEventListener('click', () => {
-    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
+    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
     .then( res => res.json())
     .then( data => {
         // console.log(data)
         remainingText.textContent = `Remaining cards: ${data.remaining}`
         cardDisplay.children[0].innerHTML += `
-            <img src="${data.cards[0].image}" class="card" alt="${data.cards[0].suit}">
+            <img src=${data.cards[0].image} class="card" alt=${data.cards[0].suit}>
         `
 
         cardDisplay.children[1].innerHTML += `
-            <img src="${data.cards[1].image}" class="card" alt="${data.cards[1].suit}">
+            <img src=${data.cards[1].image} class="card" alt=${data.cards[1].suit}>
         `
 
         const winnerText = determineCardWinner(data.cards[0], data.cards[1])
         header.textContent = winnerText
+
+        if(data.remaining === 0){
+            btn2.disabled =  true 
+        }
     })
 })
 
