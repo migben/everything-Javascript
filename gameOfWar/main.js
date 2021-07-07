@@ -1,9 +1,15 @@
-const btn = document.getElementById("new-deck")
-const btn2 = document.getElementById("draw-cards")
+const newDeck = document.getElementById("new-deck") // new deck
+const drawCard = document.getElementById("draw-cards") // draw cards
 const cardDisplay = document.getElementById("cards")
 const header = document.getElementById("header")
-let deckId
 const remainingText = document.getElementById("remaining")
+const computerScoreEl = document.getElementById("computer-score")
+const myScoreEl = document.getElementById("player-score")
+let computerScore = 0
+let myScore = 0
+let deckId
+
+// api link => https://deckofcardsapi.com
 
 function handleClick(){
     fetch("https://deckofcardsapi.com/api/deck/new/shuffle")
@@ -15,19 +21,19 @@ function handleClick(){
     })
 }
 
-btn.addEventListener('click', handleClick)
+newDeck.addEventListener('click', handleClick)
 
-btn2.addEventListener('click', () => {
+drawCard.addEventListener('click', () => {
     fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
     .then( res => res.json())
     .then( data => {
         // console.log(data)
         remainingText.textContent = `Remaining cards: ${data.remaining}`
-        cardDisplay.children[0].innerHTML += `
+        cardDisplay.children[0].innerHTML = `
             <img src=${data.cards[0].image} class="card" alt=${data.cards[0].suit}>
         `
 
-        cardDisplay.children[1].innerHTML += `
+        cardDisplay.children[1].innerHTML = `
             <img src=${data.cards[1].image} class="card" alt=${data.cards[1].suit}>
         `
 
@@ -35,7 +41,7 @@ btn2.addEventListener('click', () => {
         header.textContent = winnerText
 
         if(data.remaining === 0){
-            btn2.disabled =  true 
+            drawCard.disabled =  true 
         }
     })
 })
@@ -48,9 +54,13 @@ function determineCardWinner(card1, card2){
     const card2ValueIndex = valueOptions.indexOf(card2.value)
 
     if(card1ValueIndex > card2ValueIndex){
-        return "Card 1 Wins!"
+        computerScore++
+        computerScoreEl.textContent = `Computer score: ${computerScore}`
+        return "Computer Wins!"
     } else if(card1ValueIndex < card2ValueIndex) {
-        return "Card 2 Wins!"
+        myScore++
+        myScoreEl.textContent = `Player score: ${myScore}`
+        return "Player Wins!"
     } else {
         return "War!"
     }
