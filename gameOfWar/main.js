@@ -1,6 +1,7 @@
 const btn = document.getElementById("new-deck")
 const btn2 = document.getElementById("draw-cards")
-const cardsDisplay = document.getElementById("cards")
+const cardDisplay = document.getElementById("cards")
+const header = document.getElementById("header")
 let deckId
 
 function handleClick(){
@@ -15,17 +16,37 @@ function handleClick(){
 btn.addEventListener('click', handleClick)
 
 btn2.addEventListener('click', () => {
-    fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
+    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
     .then( res => res.json())
     .then( data => {
         console.log(data)
-        cardsDisplay.innerHTML += `
-            <img src="${data.cards[0].image}" alt="${data.cards[0].suit}" width="150" height="150">
-            <img src="${data.cards[1].image}" alt="${data.cards[1].suit}" width="150" height="150">
+
+        cardDisplay.children[0].innerHTML += `
+            <img src="${data.cards[0].image}" class="card" alt="${data.cards[0].suit}">
         `
+
+        cardDisplay.children[1].innerHTML += `
+            <img src="${data.cards[1].image}" class="card" alt="${data.cards[1].suit}">
+        `
+
+        const winnerText = determineCardWinner(data.cards[0], data.cards[1])
+        header.textContent = winnerText
     })
 })
 
 
+function determineCardWinner(card1, card2){
+    const valueOptions = ["2", "3", "4", "5", "6", "7", "8", "9", 
+    "10", "JACK", "QUEEN", "KING", "ACE"]
+    const card1ValueIndex = valueOptions.indexOf(card1.value)
+    const card2ValueIndex = valueOptions.indexOf(card2.value)
 
+    if(card1ValueIndex > card2ValueIndex){
+        return "Card 1 Wins!"
+    } else if(card1ValueIndex < card2ValueIndex) {
+        return "Card 2 Wins!"
+    } else {
+        return "War!"
+    }
+}
 
