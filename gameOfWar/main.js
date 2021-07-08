@@ -21,6 +21,18 @@ function handleClick(){
     })
 }
 
+/* with Async / await
+
+async function handleClick(){
+    const response =  await fetch("https://deckofcardsapi.com/api/deck/new/shuffle")
+    const data = res.json()
+    console.log(data)
+    remainingText.textContent = `Remaining cards: ${data.remaining}`
+    deckId = data.deck_id
+}
+
+*/
+
 newDeck.addEventListener('click', handleClick)
 
 drawCard.addEventListener('click', () => {
