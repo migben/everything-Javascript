@@ -3,6 +3,7 @@ const crypto = document.getElementById("crypto")
 const cryptoTop = document.getElementById("crypto-top")
 const time = document.getElementById("time")
 const weather = document.getElementById("weather")
+const zen = document.getElementById("zen")
 
 // Open Weather Api https://openweathermap.org/api
 // weather icons from the API https://openweathermap.org/weather-conditions
