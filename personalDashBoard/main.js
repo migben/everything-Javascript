@@ -2,16 +2,21 @@ const author = document.getElementById("author")
 const crypto = document.getElementById("crypto")
 const cryptoTop = document.getElementById("crypto-top")
 const time = document.getElementById("time")
+const weather = document.getElementById("weather")
 
 // Open Weather Api https://openweathermap.org/api
+// weather icons from the API https://openweathermap.org/weather-conditions
 // Unsplash API
 // Crypto API
 // info about getting local time with JS
+// -----------------------------------------------------
+// random mantra message while idle
 
+// unsplash api
 fetch(`https://api.unsplash.com/photos/random?client_id=Ll4QDk_gTHAa6NddN02H2d6BemwOVx9hpU51i3J_F2I&orientation=landscape&query=nature`)
 .then(res => res.json())
 .then(data => {
-    console.log(data)
+    // console.log(data)
     document.body.style.backgroundImage = `url(${data.urls.full})`
     author.textContent = `By ${data.user.name}`
 })
@@ -34,18 +39,38 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         `
         
         crypto.innerHTML += `
-            <p class="market">💵: $${data.market_data.current_price.usd}</p>
-            <p class="market">💹: $${data.market_data.high_24h.usd}</p>
-            <p class="market">📉: $${data.market_data.low_24h.usd}</p>
+            <p class="market">💵: $${(data.market_data.current_price.usd).toFixed(3)}</p>
+            <p class="market">💹: $${(data.market_data.high_24h.usd).toFixed(3)}</p>
+            <p class="market">📉: $${(data.market_data.low_24h.usd).toFixed(3)}</p>
         `
 
     })
     .catch(err => console.log(err))
 
-
+// getting our time
 function getCurrentTime(){
     let today = new Date()
-    time.textContent = `${today.getHours()}:${today.getMinutes()}`
+    time.textContent = `${today.getHours()}:${(today.getMinutes()).toString().length == 1? "0"+(today.getMinutes()).toString() : today.getMinutes()}`
 }
 
-setInterval(getCurrentTime,1000)
+setInterval(getCurrentTime, 1000)
+
+// getting the current weather
+
+navigator.geolocation.getCurrentPosition(position => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=94a74074c9c19af7d19a0c745c7e4f03`)
+        .then(res => {
+            if (!res.ok) {
+                throw Error("Weather data not available")
+            }
+            return res.json()
+        })
+        .then(data => {
+            weather.innerHTML = `
+                <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt=${data.weather[0].description} title="${data.weather[0].description}">
+                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
+                <p class="weather-city">${data.name}</p>
+            `         
+        })
+        .catch(err => console.error(err))
+})

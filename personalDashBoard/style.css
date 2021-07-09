@@ -30,22 +30,63 @@ div.top {
 
 h1.time{
     text-align: center;
+    font-size: 10rem;
+    margin-top: -30px;
+    font-weight: 300;
+}
+
+#author {
+    font-weight: bold;
 }
 
 div#crypto {
     font-size: 1.3rem;
 }
 
+div#crypto:hover {
+    padding: 5px;
+    background-color:rgba(0, 0, 0, 0.2);
+    border-radius: 15%;
+}
+
 div#crypto > p {
     margin: 0 ;
+    margin-left: 50px;
 }
 
 div#crypto-top {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
-div#crypto-top {
+div#crypto-top > span {
     margin-left: 10px;
+}
+
+div#weather {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-self: flex-start;
+}
+
+div#weather > img {
+    width: 70px;
+}
+
+p.weather-city {
+    width: 100%;
+    text-align: right;
+    margin: 0;
+    margin-top: -10px;
+    font-weight: bold;
+}
+
+p.weather-temp {
+    margin: 0;
+    font-size: 1.7rem;
+    margin-left: -10px;
 }
