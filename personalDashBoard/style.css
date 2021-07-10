@@ -35,10 +35,6 @@ h1.time{
     font-weight: 300;
 }
 
-#author {
-    font-weight: bold;
-}
-
 div#crypto {
     font-size: 1.3rem;
 }
@@ -47,6 +43,7 @@ div#crypto:hover {
     padding: 5px;
     background-color:rgba(0, 0, 0, 0.2);
     border-radius: 15%;
+    cursor: pointer;
 }
 
 div#crypto > p {
@@ -89,4 +86,11 @@ p.weather-temp {
     margin: 0;
     font-size: 1.7rem;
     margin-left: -10px;
+}
+
+a#author {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
 }
