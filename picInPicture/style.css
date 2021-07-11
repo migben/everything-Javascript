@@ -18,7 +18,10 @@ body {
 button#btn {
     background-color: red;
     border: none;
+    outline: none;
+    border-radius: 7px;
     box-shadow: 0 5px 0 darkred;
+    text-shadow: 0 2px 5px black;
     color: gold;
     padding: 1em 1.5em;
     position: relative;
