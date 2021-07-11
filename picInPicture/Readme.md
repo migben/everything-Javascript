@@ -1,7 +1,7 @@
 # Picture In Pic
 
 This is a small project that's possible thanks to MDN. The project will
-only be working on chrome as it's the most used browser.
+only be working on **Chrome** as it's the most used browser.
 
 ## Instructions
 
