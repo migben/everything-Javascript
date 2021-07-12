@@ -5,6 +5,7 @@ html {
 body {
     margin: 0;
     background-color: #45badd;
+    /* yellow ish fabb34 - blue  */
 }
 
 .container {
@@ -18,4 +19,44 @@ body {
     background-size: contain;
     background-position: left center;
     background-repeat: no-repeat;
+}
+
+button#btn {
+    background-color: rgb(240, 61, 136);
+    border: none;
+    outline: none; /*no blue outline after clicking*/
+    border-radius: 7px;
+    box-shadow: 0 5px 0 rgb(151, 4, 53);
+    text-shadow: 0 2px 5px black;
+    color: #fff;
+    padding: 1em 1.5em;
+    position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    font-family:  "Courier New", Courier, monospace, sans-serif;
+    margin-bottom: 10px;
+}
+
+button#btn:hover {
+    background-color: #ce1c75;
+    cursor: pointer;
+}
+
+button#btn:active {
+    box-shadow: none;
+    top: 5px;
+}
+
+button#btn:disabled {
+    cursor: default;
+    filter: brightness(30%);
+}
+
+/* Media Query */
+
+@media screen and (max-width: 1000px){
+    .container {
+        background-size: cover;
+        background-position: center center;
+    }
 }
