@@ -7,4 +7,4 @@ except religious ones. Be warned ⚠ there is audio involved and some dark and n
 
 Press that big red button on the center and have fun. The button will be disable while the joke start running. ✌
 
-**The site is live** [here](spiteful-cobweb.surge.sh)
+**The site is live** [here](spiteful-cobweb.surge.sh)!
