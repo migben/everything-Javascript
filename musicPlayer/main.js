@@ -4,6 +4,8 @@ const artist = document.getElementById("artist")
 const music = document.querySelector('audio')
 const progressContainer = document.getElementById("progress-container")
 const progress = document.getElementById("progress")
+const currentTimeEl = document.getElementById("current-time")
+const durationEl = document.getElementById("duration")
 const prevBtn = document.getElementById("prev")
 const playBtn = document.getElementById("play")
 const nextBtn = document.getElementById("next")
@@ -12,18 +14,23 @@ const nextBtn = document.getElementById("next")
 // Music
 const songs = [
     {
-        name: "Set Free",
-        displayName: "Set Free - RE CodeVeronica",
-        artist: "Capcom Sound Team"
+        name: "departureHH",
+        displayName: "HxH - Departure",
+        artist: "Hunter x Hunter"
     },
     {
-        name: "Chrono",
+        name: "schalaTheme",
         displayName: "Schala Theme",
         artist: "Square Enix"
     },
     {
-        name: "Sleeping Beauty",
+        name: "sleepingBeauty",
         displayName: "RE Chronicles",
+        artist: "Capcom Sound Team"
+    },
+    {
+        name: "setFree",
+        displayName: "RE CodeVeronica",
         artist: "Capcom Sound Team"
     }
 ]
@@ -100,6 +107,28 @@ function updateProgressBar(e) {
         // updating the progress bar width
         const progressPercent = (currentTime/duration) * 100
         progress.style.width = `${progressPercent}%`
+        // calc duration of music and display it
+        const durationMinutes = Math.floor(duration / 60)
+        let durationSeconds = Math.floor(duration % 60)
+
+        if(durationSeconds < 10) {
+            durationSeconds = `0${durationSeconds}`
+        }
+        
+        // Duration delay to avoid NaN to be displayed
+        if(durationSeconds) {
+            durationEl.textContent = `${durationMinutes}:${durationSeconds}`
+        }
+        durationEl.textContent = `${durationMinutes}:${durationSeconds}`
+
+        // calc duration of music and display it
+        const currentMinutes = Math.floor(currentTime / 60)
+        let currentSeconds = Math.floor(currentTime % 60)
+        if(currentSeconds < 10) {
+            currentSeconds = `0${currentSeconds}`
+        }
+        currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`
+
     }
 }
 
