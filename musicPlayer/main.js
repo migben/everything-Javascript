@@ -20,17 +20,17 @@ const songs = [
     },
     {
         name: "schalaTheme",
-        displayName: "Schala Theme",
+        displayName: "Schala - Chrono Trigger",
         artist: "Square Enix"
     },
     {
         name: "sleepingBeauty",
-        displayName: "RE Chronicles",
+        displayName: "SleepBeauty - RE,Chronicles",
         artist: "Capcom Sound Team"
     },
     {
         name: "setFree",
-        displayName: "RE CodeVeronica",
+        displayName: "Set Free - RE,CodeVeronica",
         artist: "Capcom Sound Team"
     }
 ]
@@ -132,9 +132,22 @@ function updateProgressBar(e) {
     }
 }
 
+
+// Set the progress bar
+
+function setProgressBar(e) {
+    const width = this.clientWidth
+    const clickX = e.offsetX
+    const {duration} = music
+    // currentTime attr under audio el
+    music.currentTime = (clickX / width) * duration 
+}
+
 // Event listeners
 
 prevBtn.addEventListener("click", prevSong)
 nextBtn.addEventListener("click", nextSong)
-
+music.addEventListener("ended",nextSong)
 music.addEventListener("timeupdate", updateProgressBar)
+
+progressContainer.addEventListener("click", setProgressBar)
