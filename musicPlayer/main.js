@@ -15,7 +15,7 @@ const nextBtn = document.getElementById("next")
 const songs = [
     {
         name: "departureHH",
-        displayName: "HxH - Departure",
+        displayName: "Departure",
         artist: "Hunter x Hunter"
     },
     {
